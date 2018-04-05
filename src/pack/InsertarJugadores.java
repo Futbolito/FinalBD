@@ -38,7 +38,7 @@ public class InsertarJugadores extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        eq = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -60,16 +60,21 @@ public class InsertarJugadores extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel2.setText("Nombre del equipo del jugador:");
+        jLabel2.setText("ID del equipo del jugador:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(33, 103, 220, 15);
-        getContentPane().add(eq);
-        eq.setBounds(33, 135, 202, 20);
+        getContentPane().add(id);
+        id.setBounds(33, 135, 202, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(30, 180, 100, 25);
 
@@ -98,7 +103,7 @@ public class InsertarJugadores extends javax.swing.JFrame {
         {
             Connection conexion;
             conexion=Conexion.obtener();
-         //   sSQL = "Insert Into jugadores (Nombre_Jugador, id_Equipo) values ('"+nom.getText()+"','"+eq.getText()+"');";
+            sSQL = "Insert Into jugadores (Nombre_Jugador, id_Equipo) values ('"+nom.getText()+"','"+id.getText()+"');";
     
     try
     {
@@ -116,8 +121,14 @@ public class InsertarJugadores extends javax.swing.JFrame {
         }
        
        nom.setText("");
-      
+       id.setText("");
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Insertar v=new Insertar();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,8 +168,8 @@ public class InsertarJugadores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JTextField eq;
     private javax.swing.JLabel fondo;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField nom;
