@@ -5,6 +5,14 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Wilthouk
@@ -28,53 +36,80 @@ public class InsertarJornadas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        id = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(280, 176));
+        setMinimumSize(new java.awt.Dimension(280, 176));
+        setPreferredSize(new java.awt.Dimension(280, 176));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 153));
         jLabel1.setText("ID del torneo al que pertenece la jornda:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 30, 270, 15);
 
-        jTextField1.setText("jTextField1");
+        id.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(id);
+        id.setBounds(100, 60, 75, 30);
 
-        jButton1.setText("Guardar Cambios");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
+        btnVolver.setBorder(null);
+        btnVolver.setBorderPainted(false);
+        btnVolver.setContentAreaFilled(false);
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(40, 100, 100, 25);
 
-        btnVolver.setText("Volver");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
+        btnGuardar.setBorder(null);
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar);
+        btnGuardar.setBounds(150, 100, 91, 25);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
+        getContentPane().add(fondo);
+        fondo.setBounds(0, 0, 730, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+         String sSQL="";
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            sSQL = "Insert Into jornada (id_Torneo) values ("+id.getText()+")";
+    
+    try
+    {
+        Statement st = (Statement) conexion.createStatement();
+        st.executeUpdate(sSQL);
+    }
+    catch(SQLException ex){
+        JOptionPane.showMessageDialog(null,ex);  
+    }
+    
+}       catch (SQLException ex) {
+            Logger.getLogger(InsertarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InsertarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       id.setText("");
+       
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,9 +147,10 @@ public class InsertarJornadas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

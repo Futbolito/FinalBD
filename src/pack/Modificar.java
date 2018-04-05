@@ -5,6 +5,17 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Wilthouk
@@ -28,46 +39,114 @@ public class Modificar extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxI = new javax.swing.JComboBox<>();
         btnVolver = new javax.swing.JButton();
+        btnVolver1 = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(265, 170));
+        setMinimumSize(new java.awt.Dimension(265, 170));
+        setPreferredSize(new java.awt.Dimension(265, 170));
+        setResizable(false);
+        addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                formMouseWheelMoved(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+        getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 153));
         jLabel1.setText("Seleccione la tabla a modificar:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(40, 40, 210, 15);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxI);
+        cbxI.setBounds(67, 65, 147, 20);
 
-        btnVolver.setText("Volver");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
+        btnVolver.setBorder(null);
+        btnVolver.setBorderPainted(false);
+        btnVolver.setContentAreaFilled(false);
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(150, 100, 90, 25);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
+        btnVolver1.setBorder(null);
+        btnVolver1.setBorderPainted(false);
+        btnVolver1.setContentAreaFilled(false);
+        btnVolver1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolver1MouseClicked(evt);
+            }
+        });
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver1);
+        btnVolver1.setBounds(30, 100, 90, 25);
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
+        getContentPane().add(fondo);
+        fondo.setBounds(0, 0, 730, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+    Inicio ab=new Inicio();
+    ab.setVisible(true);
+    this.hide();
+    
+    
+    
+    }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //cbxI.removeAllItems();
+        //cbxI.removeItem(1); 
+        
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("SHOW TABLES" );
+            ResultSet resultado = consulta.executeQuery();
+            
+                //String dato=resultado.getString("SHOW TABLES");
+                while(resultado.next())
+            {
+                cbxI.addItem(resultado.getString(1));                
+            }
+            conexion.close();
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void btnVolver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolver1MouseClicked
+
+    private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseWheelMoved
 
     /**
      * @param args the command line arguments
@@ -106,7 +185,9 @@ public class Modificar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnVolver1;
+    private javax.swing.JComboBox<String> cbxI;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

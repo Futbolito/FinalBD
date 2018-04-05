@@ -5,6 +5,15 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.UIManager.getString;
+
 /**
  *
  * @author Wilthouk
@@ -28,63 +37,113 @@ public class Insertar extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cbxTablas = new javax.swing.JComboBox<>();
+        cbxI = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        cbxTablas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Jugadores", "Equipos", "Jornadas", "Torneo", "Partidos", " " }));
-        cbxTablas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTablasActionPerformed(evt);
+        setMaximumSize(new java.awt.Dimension(314, 195));
+        setMinimumSize(new java.awt.Dimension(314, 195));
+        setPreferredSize(new java.awt.Dimension(314, 195));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
-        jLabel2.setText("Seleccione la tabla a la que quiere insertar datos:");
+        cbxI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbxI);
+        cbxI.setBounds(110, 80, 100, 20);
 
-        btnVolver.setText("Volver");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 204, 153));
+        jLabel2.setText("Elija la tabla que quiere insertar datos: ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(40, 40, 280, 15);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addComponent(cbxTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 51, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnVolver)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addComponent(cbxTablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
+        btnVolver.setBorder(null);
+        btnVolver.setBorderPainted(false);
+        btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(40, 120, 100, 23);
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
+        btnGuardar.setBorder(null);
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar);
+        btnGuardar.setBounds(190, 120, 91, 25);
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
+        getContentPane().add(fondo);
+        fondo.setBounds(0, 0, 730, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTablasActionPerformed
+    private void cbxIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxTablasActionPerformed
+    }//GEN-LAST:event_cbxIActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Inicio ab=new Inicio();
+        ab.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("SHOW TABLES" );
+            ResultSet resultado = consulta.executeQuery();
+            
+                //String dato=resultado.getString("SHOW TABLES");
+                while(resultado.next())
+            {
+                cbxI.addItem(resultado.getString(1));                
+            }
+            conexion.close();
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+       
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,8 +181,10 @@ public class Insertar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> cbxTablas;
+    private javax.swing.JComboBox<String> cbxI;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
