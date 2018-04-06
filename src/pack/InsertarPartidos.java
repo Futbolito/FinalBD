@@ -5,6 +5,14 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Wilthouk
@@ -28,19 +36,19 @@ public class InsertarPartidos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nomequipoL = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        nomequipoV = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        marcadorL = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        marcadorV = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        nomestadio = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -57,70 +65,56 @@ public class InsertarPartidos extends javax.swing.JFrame {
         jLabel1.setText("ID de la nueva jornada:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(32, 25, 160, 15);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(32, 50, 240, 20);
+        getContentPane().add(id);
+        id.setBounds(32, 50, 240, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
         jLabel2.setText("Nombre del equipo Local:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 90, 170, 15);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(32, 113, 240, 20);
+        getContentPane().add(nomequipoL);
+        nomequipoL.setBounds(32, 113, 240, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 153));
         jLabel3.setText("Nombre del equipo Visitante: ");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(32, 151, 190, 15);
-
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(32, 176, 240, 20);
+        getContentPane().add(nomequipoV);
+        nomequipoV.setBounds(32, 176, 240, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 204, 153));
         jLabel4.setText("Marcador Local:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(32, 214, 120, 15);
-
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(32, 239, 59, 20);
+        getContentPane().add(marcadorL);
+        marcadorL.setBounds(32, 239, 6, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel5.setText("Marcador Viitante");
+        jLabel5.setText("Marcador Visitante");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(32, 277, 130, 15);
-
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(32, 302, 59, 20);
+        getContentPane().add(marcadorV);
+        marcadorV.setBounds(32, 302, 6, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 204, 153));
         jLabel6.setText("Fecha del partido:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(32, 340, 140, 15);
-
-        jTextField6.setText("jTextField6");
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(32, 365, 139, 20);
+        getContentPane().add(fecha);
+        fecha.setBounds(32, 365, 139, 20);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 204, 153));
         jLabel7.setText("Nombre del estadio:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(32, 403, 140, 15);
-
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(32, 423, 139, 20);
+        getContentPane().add(nomestadio);
+        nomestadio.setBounds(32, 423, 139, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);
@@ -133,6 +127,11 @@ public class InsertarPartidos extends javax.swing.JFrame {
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGuardar);
         btnGuardar.setBounds(290, 450, 91, 25);
 
@@ -142,6 +141,36 @@ public class InsertarPartidos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+        String sSQL="";
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            //sSQL = "Insert Into partidos (id_Jornada, Ubicacion) values ('"+id.getText()+"','"+ubi.getText()+"');";
+    
+    try
+    {
+        Statement st = (Statement) conexion.createStatement();
+        st.executeUpdate(sSQL);
+    }
+    catch(SQLException ex){
+        JOptionPane.showMessageDialog(null,ex);  
+    }
+    
+}       catch (SQLException ex) {
+            Logger.getLogger(InsertarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InsertarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+      // nom.setText("");
+       //ubi.setText("");
+                                              
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +210,9 @@ public class InsertarPartidos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JTextField fecha;
     private javax.swing.JLabel fondo;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,12 +220,10 @@ public class InsertarPartidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField marcadorL;
+    private javax.swing.JTextField marcadorV;
+    private javax.swing.JTextField nomequipoL;
+    private javax.swing.JTextField nomequipoV;
+    private javax.swing.JTextField nomestadio;
     // End of variables declaration//GEN-END:variables
 }
