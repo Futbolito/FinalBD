@@ -1,6 +1,7 @@
 
 package pack;
-
+import java.applet.AudioClip;
+import java.net.URL;
 
 public class Inicio extends javax.swing.JFrame {
 
@@ -94,6 +95,11 @@ public class Inicio extends javax.swing.JFrame {
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5);
         jButton5.setBounds(30, 270, 100, 25);
 
@@ -129,6 +135,14 @@ public class Inicio extends javax.swing.JFrame {
         ab.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        AudioClip sonido;
+        URL url=this.getClass().getResource("/pack.Media/Song.wav");
+        sonido=java.applet.Applet.newAudioClip(url);
+        
+        sonido.play();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
