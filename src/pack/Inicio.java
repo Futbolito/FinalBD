@@ -19,7 +19,8 @@ public class Inicio extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(657, 350));
@@ -89,9 +90,16 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(60, 30, 270, 70);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FONDOINICIO.jpg"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -20, 650, 380);
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonMusica.png"))); // NOI18N
+        jButton5.setBorder(null);
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        getContentPane().add(jButton5);
+        jButton5.setBounds(30, 270, 100, 25);
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FONDOINICIO.jpg"))); // NOI18N
+        getContentPane().add(fondo);
+        fondo.setBounds(0, -20, 650, 380);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -158,11 +166,12 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
