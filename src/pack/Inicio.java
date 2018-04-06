@@ -113,6 +113,8 @@ public class Inicio extends javax.swing.JFrame {
         Insertar ab=new Insertar();
         ab.setVisible(true);
         this.setVisible(false);
+        //Hola carnal
+        int azul=0;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
