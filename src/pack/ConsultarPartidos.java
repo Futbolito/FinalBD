@@ -4,18 +4,49 @@
  * and open the template in the editor.
  */
 package pack;
-
+import MySQL.Conexion;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.logging.*;
 /**
  *
  * @author Wilthouk
  */
 public class ConsultarPartidos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConsultarPartidos
-     */
-    public ConsultarPartidos() {
+    DefaultTableModel modeloPartido;
+     MySQL.Conexion con = new MySQL.Conexion();
+    public ConsultarPartidos() throws SQLException, ClassNotFoundException {
+        modeloPartido = new DefaultTableModel (null, getColumnas());
+        setFilas();
         initComponents();
+        
+    }
+    private String[] getColumnas(){
+        String columna[]= new String[]{"id Partido","id Jornada","Equipo Local","Equipo Visitante","Marcador Local","Marcador Visitante","id Equipo Local","id Equipo Visitante","Fecha","id Estadio" };
+        return columna;
+    }
+    private void setFilas() throws SQLException, ClassNotFoundException
+    {
+        try{
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Partido, id_Jornada, equipo_local, equipo_visitante, marcador_local, marcador_visitante, id_EquipoL, id_EquipoV, fecha, id_Estadio  from partidos");
+            ResultSet r = consulta.executeQuery();
+            Object datos[]=new Object[10];
+            while(r.next()){
+                for(int i = 0;i<10;i++)
+                {
+                    datos[i]=r.getObject(i+1);
+                }
+                modeloPartido.addRow(datos);
+            }
+            r.close();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(ConsultarEquipos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -40,17 +71,7 @@ public class ConsultarPartidos extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable2.setModel(modeloPartido);
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
@@ -106,7 +127,13 @@ public class ConsultarPartidos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarPartidos().setVisible(true);
+                try {
+                    new ConsultarPartidos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConsultarPartidos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ConsultarPartidos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

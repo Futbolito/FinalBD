@@ -4,20 +4,52 @@
  * and open the template in the editor.
  */
 package pack;
-
+import MySQL.Conexion;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.logging.*;
 /**
  *
  * @author Wilthouk
  */
 public class ConsultarEstadios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConsultarEstadios
-     */
-    public ConsultarEstadios() {
+    DefaultTableModel modeloEstadio;
+    MySQL.Conexion con = new MySQL.Conexion();
+    
+    public ConsultarEstadios() throws SQLException, ClassNotFoundException {
+        modeloEstadio = new DefaultTableModel (null, getColumnas());
+        setFilas();
         initComponents();
     }
-
+    private String[] getColumnas(){
+        String columna[]= new String[]{"id_Estadio","Nombre_Estadio","Ubicacion"};
+        return columna;
+    }
+  
+    private void setFilas() throws SQLException, ClassNotFoundException
+    {
+        try{
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Estadios, Nombre_Estadio, Ubicacion from estadios");
+            ResultSet r = consulta.executeQuery();
+            Object datos[]=new Object[3];
+            while(r.next()){
+                for(int i = 0;i<3;i++)
+                {
+                    datos[i]=r.getObject(i+1);
+                }
+                modeloEstadio.addRow(datos);
+            }
+            r.close();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(ConsultarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,21 +72,11 @@ public class ConsultarEstadios extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable2.setModel(modeloEstadio);
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 44, 693, 389);
+        jScrollPane2.setBounds(10, 44, 693, 160);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 204));
@@ -67,7 +89,7 @@ public class ConsultarEstadios extends javax.swing.JFrame {
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(614, 451, 100, 25);
+        btnVolver.setBounds(610, 230, 100, 25);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
         getContentPane().add(fondo);
@@ -106,7 +128,13 @@ public class ConsultarEstadios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarEstadios().setVisible(true);
+                try {
+                    new ConsultarEstadios().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConsultarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ConsultarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
