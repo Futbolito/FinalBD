@@ -138,7 +138,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         AudioClip sonido;
-        URL url=this.getClass().getResource("/pack.Media/Song.wav");
+        URL url=this.getClass().getResource("/musica/Benny Benassi - Satisfaction.wav");
         sonido=java.applet.Applet.newAudioClip(url);
         
         sonido.play();
