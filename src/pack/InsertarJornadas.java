@@ -62,6 +62,11 @@ public class InsertarJornadas extends javax.swing.JFrame {
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(40, 100, 100, 25);
 
@@ -110,6 +115,15 @@ public class InsertarJornadas extends javax.swing.JFrame {
        id.setText("");
        
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Insertar v=new Insertar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        id.setText("");
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments

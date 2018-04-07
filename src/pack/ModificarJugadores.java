@@ -28,11 +28,11 @@ public class ModificarJugadores extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        nom = new javax.swing.JTextField();
+        cbxID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nomEquipo = new javax.swing.JTextField();
         btnVolver1 = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -49,14 +49,12 @@ public class ModificarJugadores extends javax.swing.JFrame {
         jLabel1.setText("ID del Jugador a modificar: ");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 40, 190, 14);
+        getContentPane().add(nom);
+        nom.setBounds(190, 80, 185, 20);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(190, 80, 185, 20);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(190, 40, 70, 20);
+        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxID);
+        cbxID.setBounds(190, 40, 70, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
@@ -69,15 +67,18 @@ public class ModificarJugadores extends javax.swing.JFrame {
         jLabel3.setText("Nombre del equipo del jugador:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(10, 120, 200, 14);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(220, 120, 159, 20);
+        getContentPane().add(nomEquipo);
+        nomEquipo.setBounds(220, 120, 159, 20);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
         btnVolver1.setBorderPainted(false);
         btnVolver1.setContentAreaFilled(false);
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver1);
         btnVolver1.setBounds(80, 160, 90, 25);
 
@@ -96,6 +97,18 @@ public class ModificarJugadores extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        Modificar v=new Modificar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        
+        cbxID.removeAllItems();
+        nom.setText("");
+        nomEquipo.setText("");
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,12 +148,12 @@ public class ModificarJugadores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolver1;
+    private javax.swing.JComboBox<String> cbxID;
     private javax.swing.JLabel fondo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField nom;
+    private javax.swing.JTextField nomEquipo;
     // End of variables declaration//GEN-END:variables
 }

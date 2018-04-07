@@ -104,15 +104,15 @@ public class Modificar extends javax.swing.JFrame {
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
     Inicio ab=new Inicio();
     ab.setVisible(true);
-    this.hide();
+    this.setVisible(false);
     
-    
+    //LIMPIAR PANTALLA ANTES DE SALIR
+    cbxI.removeAllItems();
     
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        //cbxI.removeAllItems();
-        //cbxI.removeItem(1); 
+         
         
         try
         {

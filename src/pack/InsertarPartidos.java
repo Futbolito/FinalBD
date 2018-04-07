@@ -90,7 +90,7 @@ public class InsertarPartidos extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(32, 214, 120, 15);
         getContentPane().add(marcadorL);
-        marcadorL.setBounds(32, 239, 6, 20);
+        marcadorL.setBounds(32, 239, 100, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 204, 153));
@@ -98,7 +98,7 @@ public class InsertarPartidos extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(32, 277, 130, 15);
         getContentPane().add(marcadorV);
-        marcadorV.setBounds(32, 302, 6, 20);
+        marcadorV.setBounds(32, 302, 100, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 204, 153));
@@ -120,6 +120,11 @@ public class InsertarPartidos extends javax.swing.JFrame {
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(180, 450, 100, 25);
 
@@ -171,6 +176,15 @@ public class InsertarPartidos extends javax.swing.JFrame {
                                               
 
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Insertar v=new Insertar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        //FALTA QUEDAR DE ACUERDO CON MAU PARA LOS CAMPOS//
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments

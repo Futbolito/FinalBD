@@ -106,7 +106,10 @@ public class Consultar extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
     Inicio ab=new Inicio();
     ab.setVisible(true);
-    this.hide();
+    this.setVisible(false);
+    
+    //LIMPIAR PANTALLA ANTES DE SALIR
+    cbxI.removeAllItems();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed

@@ -28,27 +28,29 @@ public class ModificarPartidos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        nomEquipoL = new javax.swing.JTextField();
+        cbxIDPartido = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxIDJornada = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nomEquipoV = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        MarcadorV = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbxIDEstadio = new javax.swing.JComboBox<>();
         btnVolver = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        MarcadorL = new javax.swing.JTextField();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(469, 357));
-        setMinimumSize(new java.awt.Dimension(469, 357));
-        setPreferredSize(new java.awt.Dimension(469, 357));
+        setMaximumSize(new java.awt.Dimension(451, 411));
+        setMinimumSize(new java.awt.Dimension(451, 411));
+        setPreferredSize(new java.awt.Dimension(451, 411));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -57,14 +59,12 @@ public class ModificarPartidos extends javax.swing.JFrame {
         jLabel1.setText("ID del partido a modificar: ");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(30, 40, 200, 15);
+        getContentPane().add(nomEquipoL);
+        nomEquipoL.setBounds(220, 100, 190, 20);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(220, 100, 190, 20);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(220, 40, 56, 20);
+        cbxIDPartido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxIDPartido);
+        cbxIDPartido.setBounds(220, 40, 56, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
@@ -72,9 +72,9 @@ public class ModificarPartidos extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 70, 190, 15);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(220, 70, 56, 20);
+        cbxIDJornada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxIDJornada);
+        cbxIDJornada.setBounds(220, 70, 56, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 153));
@@ -84,57 +84,67 @@ public class ModificarPartidos extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel4.setText("Nombre dek equipo Visitante:");
+        jLabel4.setText("Nombre del equipo Visitante:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(26, 144, 220, 15);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(223, 141, 190, 20);
+        getContentPane().add(nomEquipoV);
+        nomEquipoV.setBounds(223, 141, 190, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel5.setText("Marcador Local:");
+        jLabel5.setText("Marcador Visitante:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(110, 180, 110, 15);
-
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(220, 180, 190, 20);
+        jLabel5.setBounds(90, 220, 130, 15);
+        getContentPane().add(MarcadorV);
+        MarcadorV.setBounds(220, 220, 190, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 204, 153));
         jLabel6.setText("Fecha del partido:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(100, 220, 110, 15);
-
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(220, 220, 190, 20);
+        jLabel6.setBounds(100, 260, 110, 10);
+        getContentPane().add(fecha);
+        fecha.setBounds(220, 260, 190, 20);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 204, 153));
         jLabel7.setText("ID del estadio: ");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(110, 260, 100, 15);
+        jLabel7.setBounds(110, 300, 100, 15);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox3);
-        jComboBox3.setBounds(220, 260, 56, 20);
+        cbxIDEstadio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxIDEstadio);
+        cbxIDEstadio.setBounds(220, 300, 56, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(70, 310, 100, 25);
+        btnVolver.setBounds(110, 350, 100, 25);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setMaximumSize(new java.awt.Dimension(451, 411));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(451, 411));
+        btnGuardar.setPreferredSize(new java.awt.Dimension(451, 411));
         getContentPane().add(btnGuardar);
-        btnGuardar.setBounds(300, 310, 91, 25);
+        btnGuardar.setBounds(230, 350, 91, 25);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 204, 153));
+        jLabel8.setText("Marcador Local:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(110, 180, 110, 15);
+        getContentPane().add(MarcadorL);
+        MarcadorL.setBounds(220, 180, 190, 20);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
         getContentPane().add(fondo);
@@ -142,6 +152,22 @@ public class ModificarPartidos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Modificar v=new Modificar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        MarcadorL.setText("");
+        MarcadorV.setText("");
+        cbxIDEstadio.removeAllItems();
+        cbxIDJornada.removeAllItems();
+        cbxIDPartido.removeAllItems();
+        fecha.setText("");
+        nomEquipoL.setText("");
+        nomEquipoV.setText(""); 
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +193,7 @@ public class ModificarPartidos extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ModificarPartidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ModificarPartidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         }
         //</editor-fold>
 
@@ -179,12 +206,15 @@ public class ModificarPartidos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField MarcadorL;
+    private javax.swing.JTextField MarcadorV;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cbxIDEstadio;
+    private javax.swing.JComboBox<String> cbxIDJornada;
+    private javax.swing.JComboBox<String> cbxIDPartido;
+    private javax.swing.JTextField fecha;
     private javax.swing.JLabel fondo;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -192,9 +222,8 @@ public class ModificarPartidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField nomEquipoL;
+    private javax.swing.JTextField nomEquipoV;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,9 +28,9 @@ public class ModificarJornadas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        ID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxID = new javax.swing.JComboBox<>();
         btnVolver1 = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -47,10 +47,8 @@ public class ModificarJornadas extends javax.swing.JFrame {
         jLabel1.setText("ID del Torneo: ");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(60, 80, 130, 15);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(170, 80, 165, 20);
+        getContentPane().add(ID);
+        ID.setBounds(170, 80, 165, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
@@ -58,14 +56,19 @@ public class ModificarJornadas extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(40, 40, 190, 15);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(250, 40, 56, 20);
+        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxID);
+        cbxID.setBounds(250, 40, 56, 20);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
         btnVolver1.setBorderPainted(false);
         btnVolver1.setContentAreaFilled(false);
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver1);
         btnVolver1.setBounds(80, 160, 90, 25);
 
@@ -84,6 +87,16 @@ public class ModificarJornadas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        Modificar v=new Modificar ();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        cbxID.removeAllItems();
+        ID.setText("");
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,12 +134,12 @@ public class ModificarJornadas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ID;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolver1;
+    private javax.swing.JComboBox<String> cbxID;
     private javax.swing.JLabel fondo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

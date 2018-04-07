@@ -27,12 +27,12 @@ public class ModificarEquipos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxID = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nom = new javax.swing.JTextField();
         btnVolver1 = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,9 +42,9 @@ public class ModificarEquipos extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(30, 50, 56, 20);
+        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbxID);
+        cbxID.setBounds(30, 50, 56, 20);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 153));
@@ -57,24 +57,32 @@ public class ModificarEquipos extends javax.swing.JFrame {
         jLabel2.setText("Nombre del equipo:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 80, 150, 15);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(30, 100, 296, 20);
+        getContentPane().add(nom);
+        nom.setBounds(30, 100, 296, 20);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
         btnVolver1.setBorderPainted(false);
         btnVolver1.setContentAreaFilled(false);
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver1);
         btnVolver1.setBounds(40, 150, 90, 25);
 
-        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
-        btnVolver.setBorder(null);
-        btnVolver.setBorderPainted(false);
-        btnVolver.setContentAreaFilled(false);
-        getContentPane().add(btnVolver);
-        btnVolver.setBounds(230, 150, 90, 25);
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
+        btnAceptar.setBorder(null);
+        btnAceptar.setBorderPainted(false);
+        btnAceptar.setContentAreaFilled(false);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAceptar);
+        btnAceptar.setBounds(230, 150, 90, 25);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
         getContentPane().add(fondo);
@@ -82,6 +90,20 @@ public class ModificarEquipos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        Modificar v=new Modificar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        cbxID.removeAllItems();
+        nom.setText("");
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,12 +141,12 @@ public class ModificarEquipos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnVolver1;
+    private javax.swing.JComboBox<String> cbxID;
     private javax.swing.JLabel fondo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nom;
     // End of variables declaration//GEN-END:variables
 }

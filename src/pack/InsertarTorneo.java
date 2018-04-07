@@ -28,7 +28,7 @@ public class InsertarTorneo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nom = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -45,15 +45,18 @@ public class InsertarTorneo extends javax.swing.JFrame {
         jLabel1.setText("Inserte el nombre del nuevo torneo:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(33, 34, 240, 15);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(33, 59, 242, 20);
+        getContentPane().add(nom);
+        nom.setBounds(33, 59, 242, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(40, 120, 100, 25);
 
@@ -70,6 +73,15 @@ public class InsertarTorneo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Insertar v=new Insertar();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        nom.setText("");
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +123,6 @@ public class InsertarTorneo extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nom;
     // End of variables declaration//GEN-END:variables
 }

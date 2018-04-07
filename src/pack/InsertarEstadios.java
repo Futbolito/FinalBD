@@ -131,6 +131,10 @@ public class InsertarEstadios extends javax.swing.JFrame {
         Insertar v=new Insertar();
         v.setVisible(true);
         this.setVisible(false);
+        
+        //LIMPIAR PANTALLA ANTES DE SALIR
+        nom.setText("");
+        ubi.setText("");
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
