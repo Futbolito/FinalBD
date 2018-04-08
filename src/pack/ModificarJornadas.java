@@ -5,6 +5,15 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Wilthouk
@@ -16,8 +25,73 @@ public class ModificarJornadas extends javax.swing.JFrame {
      */
     public ModificarJornadas() {
         initComponents();
+        setCombo();
+        setVentana();
+        
     }
 
+    public void setCombo()
+    {
+        
+       try
+        {
+            Connection conexion;
+            
+            conexion=Conexion.obtener();
+            
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Jornada from jornada" );
+            ResultSet resultado = consulta.executeQuery();          
+                while(resultado.next())
+            {
+                cbxID.addItem(resultado.getString(1)); 
+                
+            }          
+            //resultado.close();
+            
+        }
+       
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+         
+    public void setVentana(){
+      
+        // PRIMER CONSULTA
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Torneo from jornada where id_Jornada= '"+cbxID.getSelectedItem().toString()+"';" );           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("id_Torneo");                
+                ID.setText(dato);          
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,9 +130,13 @@ public class ModificarJornadas extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(40, 40, 190, 15);
 
-        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIDActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxID);
-        cbxID.setBounds(250, 40, 56, 20);
+        cbxID.setBounds(236, 40, 100, 20);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
@@ -76,6 +154,11 @@ public class ModificarJornadas extends javax.swing.JFrame {
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(220, 160, 90, 25);
 
@@ -97,6 +180,44 @@ public class ModificarJornadas extends javax.swing.JFrame {
         cbxID.removeAllItems();
         ID.setText("");
     }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void cbxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIDActionPerformed
+        setVentana();
+    }//GEN-LAST:event_cbxIDActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+         try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            //if(conexion.isClosed()){
+           //Conexion.obtener();}
+            Statement consulta = conexion.createStatement();
+            //if(conexion.isClosed()){
+           //Conexion.obtener();}
+            consulta.executeUpdate("update jornada set id_Torneo = '"+ID.getText()+"' where id_Jornada='"+cbxID.getSelectedItem().toString()+"';");
+            //if(conexion.isClosed()){
+           //Conexion.obtener();}
+           //ResultSet resultado = consulta.executeQuery();
+           //  conexion.close();
+           // resultado.close();
+           
+           ID.setText("");
+           cbxID.removeAllItems();
+           setCombo();
+        }
+      
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments

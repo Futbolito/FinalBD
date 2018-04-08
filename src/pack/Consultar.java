@@ -133,7 +133,7 @@ public class Consultar extends javax.swing.JFrame {
             {
                 cbxI.addItem(resultado.getString(1));                
             }
-            conexion.close();
+            //conexion.close();
         }
         catch(SQLException ex)
         {

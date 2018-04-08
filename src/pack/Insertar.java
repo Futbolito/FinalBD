@@ -185,8 +185,8 @@ public Insertar()
             {
                 cbxI.addItem(resultado.getString(1));                
             }
-            conexion.close();
-            resultado.close();
+           // conexion.close();
+            //resultado.close();
         }
         catch(SQLException ex)
         {

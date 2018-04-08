@@ -16,6 +16,7 @@ public class Conexion {
       if (cnx == null) {
          try {
             Class.forName("com.mysql.jdbc.Driver");
+             //String unicode="useSSL=false&autoReconnect=true&useUnicode=yes&characterEncoding=UTF-8";
             cnx = DriverManager.getConnection("jdbc:mysql://localhost/futbol", "root", "");
          } catch (SQLException ex) {
             throw new SQLException(ex);

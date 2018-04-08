@@ -5,6 +5,15 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Wilthouk
@@ -16,8 +25,97 @@ public class ModificarJugadores extends javax.swing.JFrame {
      */
     public ModificarJugadores() {
         initComponents();
+        setCombo();
+        setVentana();
     }
 
+      public void setCombo()
+    {
+        
+       try
+        {
+            Connection conexion;
+            
+            conexion=Conexion.obtener();
+            
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Jugador from jugadores" );
+            ResultSet resultado = consulta.executeQuery();          
+                while(resultado.next())
+            {
+                cbxID.addItem(resultado.getString(1)); 
+                
+            }          
+            //resultado.close();
+            
+        }
+       
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+         
+    public void setVentana(){
+      
+        //PRIMER CONSULTA
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select Nombre_Jugador from jugadores where id_Jugador= '"+cbxID.getSelectedItem().toString()+"';" );           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("Nombre_Jugador");                
+                nom.setText(dato);          
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       // SEGUNDA CONSULTA
+       
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("SELECT Nombre_Equipo FROM equipo inner join jugadores on equipo.id_Equipo=jugadores.id_Equipo where id_Jugador ='"+cbxID.getSelectedItem().toString()+"';" );           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("Nombre_Equipo");                
+                nomEquipo.setText(dato);          
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,9 +148,13 @@ public class ModificarJugadores extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 40, 190, 14);
         getContentPane().add(nom);
-        nom.setBounds(190, 80, 185, 20);
+        nom.setBounds(190, 80, 185, 30);
 
-        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIDActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxID);
         cbxID.setBounds(190, 40, 70, 20);
 
@@ -68,7 +170,7 @@ public class ModificarJugadores extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(10, 120, 200, 14);
         getContentPane().add(nomEquipo);
-        nomEquipo.setBounds(220, 120, 159, 20);
+        nomEquipo.setBounds(220, 120, 159, 30);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
@@ -86,6 +188,11 @@ public class ModificarJugadores extends javax.swing.JFrame {
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(220, 160, 90, 25);
 
@@ -109,6 +216,66 @@ public class ModificarJugadores extends javax.swing.JFrame {
         nom.setText("");
         nomEquipo.setText("");
     }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void cbxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIDActionPerformed
+        setVentana();
+    }//GEN-LAST:event_cbxIDActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+         try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();           
+            Statement consulta = conexion.createStatement();
+            consulta.executeUpdate("update jugadores set Nombre_Jugador = '"+nom.getText()+"' where id_Jugador='"+cbxID.getSelectedItem().toString()+"';");
+           
+           nom.setText("");
+           cbxID.removeAllItems();
+           setCombo();
+        }
+      
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         //SEGUNDA CONSULTA UPDATE
+         
+          try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();           
+            Statement consulta = conexion.createStatement();
+           // consulta.executeUpdate("update jugadores set Nombre_Jugador = '"+nom.getText()+"' where id_Jugador='"+cbxID.getSelectedItem().toString()+"';");
+           
+            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
+            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
+            //ANALIZAR ESTO MAS A FONDO CUANDO TENGA MAS TIEMPO
+            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
+            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
+            
+           nom.setText("");
+           cbxID.removeAllItems();
+           setCombo();
+        }
+      
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
