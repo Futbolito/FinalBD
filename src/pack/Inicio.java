@@ -111,29 +111,23 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //KIONDAS, SI VES LAS ACTUALIZACIONES?
 
-
-        Insertar ab=new Insertar();
+        Insertar ab=new Insertar(); 
         ab.setVisible(true);
-        this.setVisible(false);
-        //Hola carnal
-        int azul=0;
+        this.dispose();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Modificar ab=new Modificar();
         ab.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Consultar ab=new Consultar();
-    
-        
-        
         ab.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

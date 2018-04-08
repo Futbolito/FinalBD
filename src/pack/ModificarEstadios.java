@@ -80,14 +80,14 @@ public class ModificarEstadios extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver1);
-        btnVolver1.setBounds(80, 160, 90, 25);
+        btnVolver1.setBounds(90, 150, 90, 25);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(220, 160, 90, 25);
+        btnVolver.setBounds(210, 150, 90, 25);
 
         fondo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         fondo.setForeground(new java.awt.Color(0, 204, 153));

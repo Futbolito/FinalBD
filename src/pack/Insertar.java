@@ -20,11 +20,43 @@ import static javax.swing.UIManager.getString;
  */
 public class Insertar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Insertar
-     */
-    public Insertar() {
-        initComponents();
+public Insertar()
+{
+    initComponents(); 
+}
+   /* public Insertar()throws SQLException, ClassNotFoundException
+            {
+                initComponents(); 
+                cargarcbx();
+            }
+   private void cargarcbx()  throws SQLException, ClassNotFoundException
+    {
+        
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("SHOW TABLES" );
+            ResultSet resultado = consulta.executeQuery();
+            
+                //String dato=resultado.getString("SHOW TABLES");
+                while(resultado.next())
+            {
+                cbxI.addItem(resultado.getString(1));                
+            }
+            conexion.close();
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -54,9 +86,17 @@ public class Insertar extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
         getContentPane().setLayout(null);
 
+        cbxI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxIMouseClicked(evt);
+            }
+        });
         cbxI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxIActionPerformed(evt);
@@ -103,13 +143,14 @@ public class Insertar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIActionPerformed
-        // TODO add your handling code here:
+    
+        
     }//GEN-LAST:event_cbxIActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         Inicio ab=new Inicio();
         ab.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
         
         //LIMPIAR PANTALLA ANTES DE SALIR
         cbxI.removeAllItems();
@@ -118,19 +159,34 @@ public class Insertar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+       
+    }//GEN-LAST:event_formWindowActivated
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+       
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cbxIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxIMouseClicked
+       
+    }//GEN-LAST:event_cbxIMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try
         {
             Connection conexion;
             conexion=Conexion.obtener();
             PreparedStatement consulta = conexion.prepareStatement("SHOW TABLES" );
             ResultSet resultado = consulta.executeQuery();
-            
+            cbxI.removeAllItems();
                 //String dato=resultado.getString("SHOW TABLES");
                 while(resultado.next())
             {
                 cbxI.addItem(resultado.getString(1));                
             }
             conexion.close();
+            resultado.close();
         }
         catch(SQLException ex)
         {
@@ -142,13 +198,7 @@ public class Insertar extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_formWindowActivated
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-       
-        
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

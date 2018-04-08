@@ -5,6 +5,15 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Wilthouk
@@ -14,10 +23,43 @@ public class ModificarEquipos extends javax.swing.JFrame {
     /**
      * Creates new form ModificarEquipos
      */
-    public ModificarEquipos() {
+    public ModificarEquipos() throws SQLException, ClassNotFoundException{
         initComponents();
+        setCombo();
     }
-
+    
+     public void setCombo()
+    {
+        
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select Nombre_Equipo from equipo" );
+            ResultSet resultado = consulta.executeQuery();
+            
+                //String dato=resultado.getString("SHOW TABLES");
+                while(resultado.next())
+            {
+                cbxID.addItem(resultado.getString(1));                
+            }
+            conexion.close();
+            resultado.close();
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,19 +78,28 @@ public class ModificarEquipos extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(363, 204));
-        setMinimumSize(new java.awt.Dimension(363, 204));
-        setPreferredSize(new java.awt.Dimension(363, 204));
+        setMaximumSize(new java.awt.Dimension(370, 250));
+        setMinimumSize(new java.awt.Dimension(370, 250));
+        setPreferredSize(new java.awt.Dimension(370, 250));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
-        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIDActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxID);
-        cbxID.setBounds(30, 50, 56, 20);
+        cbxID.setBounds(30, 50, 200, 20);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel1.setText("ID del equipo a modificar:");
+        jLabel1.setText("equipo a modificar:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(30, 30, 180, 15);
 
@@ -58,7 +109,7 @@ public class ModificarEquipos extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 80, 150, 15);
         getContentPane().add(nom);
-        nom.setBounds(30, 100, 296, 20);
+        nom.setBounds(30, 100, 296, 30);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
@@ -92,18 +143,49 @@ public class ModificarEquipos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+         
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            Statement consulta = conexion.createStatement();
+            consulta.executeUpdate("update equipo set Nombre_Equipo = '"+nom.getText()+"' where Nombre_Equipo='"+cbxID.getSelectedItem().toString()+"';");
+           // ResultSet resultado = consulta.executeQuery();
+            conexion.close();
+           // resultado.close();
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         Modificar v=new Modificar();
         v.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
         
         //LIMPIAR PANTALLA ANTES DE SALIR
         cbxID.removeAllItems();
         nom.setText("");
     }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cbxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIDActionPerformed
+        
+        
+          
+    }//GEN-LAST:event_cbxIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,7 +217,13 @@ public class ModificarEquipos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModificarEquipos().setVisible(true);
+                try {
+                    new ModificarEquipos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ModificarEquipos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ModificarEquipos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

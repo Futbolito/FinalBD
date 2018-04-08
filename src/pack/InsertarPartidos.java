@@ -54,9 +54,9 @@ public class InsertarPartidos extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(400, 485));
-        setMinimumSize(new java.awt.Dimension(400, 485));
-        setPreferredSize(new java.awt.Dimension(400, 485));
+        setMaximumSize(new java.awt.Dimension(400, 500));
+        setMinimumSize(new java.awt.Dimension(400, 500));
+        setPreferredSize(new java.awt.Dimension(400, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -126,7 +126,7 @@ public class InsertarPartidos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(180, 450, 100, 25);
+        btnVolver.setBounds(270, 430, 100, 25);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonAceptar.png"))); // NOI18N
         btnGuardar.setBorder(null);
@@ -138,7 +138,7 @@ public class InsertarPartidos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnGuardar);
-        btnGuardar.setBounds(290, 450, 91, 25);
+        btnGuardar.setBounds(280, 390, 91, 25);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
         getContentPane().add(fondo);
