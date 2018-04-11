@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -79,6 +80,11 @@ public class Modificar extends javax.swing.JFrame {
         btnVolver.setBorder(null);
         btnVolver.setBorderPainted(false);
         btnVolver.setContentAreaFilled(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver);
         btnVolver.setBounds(150, 100, 90, 25);
 
@@ -156,6 +162,78 @@ public class Modificar extends javax.swing.JFrame {
     private void cbxIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxIActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+         String opcion=cbxI.getSelectedItem().toString();
+        switch(opcion)
+        {
+            case "equipo":
+        {
+            try {
+                EliminarEquipos v = new EliminarEquipos();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+         break;
+            
+            case "estadios":
+              {
+            try {
+                EliminarEstadios v = new EliminarEstadios();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+              break;
+            case "jornada":
+                {
+            try {
+                EliminarJornada v = new EliminarJornada();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+            break;
+            
+            case "jugadores":
+                 {
+            try {
+                EliminarJugadores v = new EliminarJugadores();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+                 break;
+            case "Torneo":
+                 {
+            try {
+                EliminarTorneo v = new EliminarTorneo();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+                 break;
+            case "partidos":
+                JOptionPane.showMessageDialog(null, "Debido a que la mayoria de los campos de esta tabla son foraneos, no se pueden borrar sus registros");
+                break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Andas perdido carnal");
+                break;
+            
+        
+        }
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
