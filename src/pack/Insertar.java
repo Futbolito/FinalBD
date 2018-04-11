@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
 
 /**
@@ -163,16 +164,57 @@ public Insertar()
     }//GEN-LAST:event_formWindowActivated
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //switch(cbxI.getSelectedItem())
-        //{
-          //  case 1:          
-            //    obj.setVisible(true);
-             // this.dispose();   
-               // break;
-                
-            //case 2:
-                
-       // }
+       String opcion=cbxI.getSelectedItem().toString();
+        switch(opcion)
+        {
+            case "equipo":
+        {
+            InsertarEquipos v = new InsertarEquipos();
+            v.setVisible(true);
+            this.setVisible(false);
+        }
+         break;
+            
+            case "estadios":
+              {
+                  InsertarEstadios v = new InsertarEstadios();
+                  v.setVisible(true);
+                  this.setVisible(false);
+        }
+              break;
+            case "jornada":
+                {
+                    InsertarJornadas v = new InsertarJornadas();
+                    v.setVisible(true);
+                    this.setVisible(false);
+                }
+            break;
+            
+            case "jugadores":
+                 {
+                     InsertarJugadores v = new InsertarJugadores();
+                     v.setVisible(true);
+                     this.setVisible(false);
+                }
+                 break;
+            case "Torneo":
+                 {
+                     InsertarTorneo v = new InsertarTorneo();
+                     v.setVisible(true);
+                     this.setVisible(false);
+                }
+                 break;
+            case "partidos":
+                InsertarPartidos v = new InsertarPartidos();
+                     v.setVisible(true);
+                     this.setVisible(false);
+                break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Andas perdido carnal");
+                break;
+            
+        
+        }
        
     }//GEN-LAST:event_btnGuardarActionPerformed
 

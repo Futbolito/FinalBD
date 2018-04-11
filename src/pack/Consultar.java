@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -113,16 +114,80 @@ public class Consultar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-        try {
-            ConsultarEquipos e = new ConsultarEquipos();
-            e.setVisible(true);
-            this.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        String opcion=cbxI.getSelectedItem().toString();
+        switch(opcion)
+        {
+            case "equipo":
+        {
+            try {
+                ConsultarEquipos v = new ConsultarEquipos();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+         break;
+            
+            case "estadios":
+              {
+            try {
+                ConsultarEstadios v = new ConsultarEstadios();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+              break;
+            case "jornada":
+                {
+            try {
+                ConsultarJornadas v = new ConsultarJornadas();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+            break;
+            
+            case "jugadores":
+                 {
+            try {
+                ConsultarJugadores v = new ConsultarJugadores();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+                 break;
+            case "Torneo":
+                 {
+            try {
+                ConsultarTorneo v = new ConsultarTorneo();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+                 break;
+            case "partidos":
+                {
+            try {
+                ConsultarPartidos v = new ConsultarPartidos();
+                v.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+            
+        
+        }
+      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cbxIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIActionPerformed

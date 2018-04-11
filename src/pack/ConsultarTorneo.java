@@ -5,6 +5,15 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Wilthouk
@@ -14,8 +23,40 @@ public class ConsultarTorneo extends javax.swing.JFrame {
     /**
      * Creates new form ConsultarTorneo
      */
-    public ConsultarTorneo() {
+    DefaultTableModel ModeloTor;
+    MySQL.Conexion con = new MySQL.Conexion();
+    
+    public ConsultarTorneo() throws SQLException, ClassNotFoundException {
+        ModeloTor = new DefaultTableModel (null, getColumnas());
+        setFilas();
         initComponents();
+    }
+     private String[] getColumnas(){
+        String columna[]= new String[]{"id_Torneo","Nombre_Torneo"};
+        return columna;
+    }
+      private void setFilas() throws SQLException, ClassNotFoundException
+    {
+        try{
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Torneo, Nombre_Torneo from torneo");
+            ResultSet r = consulta.executeQuery();
+            Object datos[]=new Object[2];
+            while(r.next()){
+                for(int i = 0;i<2;i++)
+                {
+                    datos[i]=r.getObject(i+1);
+                }
+                ModeloTor.addRow(datos);
+            }
+            //conexion.close();
+            r.close();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(ConsultarEquipos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -55,17 +96,7 @@ public class ConsultarTorneo extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable2.setModel(ModeloTor);
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
@@ -121,7 +152,13 @@ public class ConsultarTorneo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarTorneo().setVisible(true);
+                try {
+                    new ConsultarTorneo().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConsultarTorneo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ConsultarTorneo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
