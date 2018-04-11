@@ -44,6 +44,7 @@ public class ConsultarEquipos extends javax.swing.JFrame {
                 }
                 modeloEquipo.addRow(datos);
             }
+            //conexion.close();
             r.close();
         }
         catch (SQLException ex)

@@ -67,6 +67,11 @@ public class Modificar extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 40, 210, 15);
 
+        cbxI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxI);
         cbxI.setBounds(67, 65, 147, 20);
 
@@ -147,6 +152,10 @@ public class Modificar extends javax.swing.JFrame {
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseWheelMoved
+
+    private void cbxIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxIActionPerformed
 
     /**
      * @param args the command line arguments

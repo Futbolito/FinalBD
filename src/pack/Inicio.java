@@ -1,6 +1,7 @@
 
 package pack;
 import java.applet.AudioClip;
+import java.awt.event.ActionEvent;
 import java.net.URL;
 
 public class Inicio extends javax.swing.JFrame {
@@ -21,6 +22,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +46,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 140, 90, 25);
+        jButton1.setBounds(30, 120, 90, 25);
 
         jButton2.setBackground(new java.awt.Color(0, 51, 51));
         jButton2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
@@ -60,7 +62,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(140, 190, 90, 25);
+        jButton2.setBounds(30, 170, 90, 25);
 
         jButton3.setBackground(new java.awt.Color(0, 51, 51));
         jButton3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
@@ -76,12 +78,17 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(240, 140, 90, 25);
+        jButton3.setBounds(210, 120, 90, 25);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/tiburon.gif"))); // NOI18N
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
         jButton4.setBounds(390, 40, 170, 240);
 
@@ -102,6 +109,21 @@ public class Inicio extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5);
         jButton5.setBounds(30, 270, 100, 25);
+
+        jButton6.setBackground(new java.awt.Color(0, 51, 51));
+        jButton6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(51, 51, 51));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonEliminar.png"))); // NOI18N
+        jButton6.setBorder(null);
+        jButton6.setBorderPainted(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(190, 160, 120, 33);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FONDOINICIO.jpg"))); // NOI18N
         getContentPane().add(fondo);
@@ -138,6 +160,12 @@ public class Inicio extends javax.swing.JFrame {
         
         sonido.play();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       Eliminar ab=new Eliminar();
+        ab.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,6 +209,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

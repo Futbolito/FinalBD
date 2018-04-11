@@ -43,6 +43,7 @@ public class ConsultarJornadas extends javax.swing.JFrame {
                 modeloJornada.addRow(datos);
             }
             r.close();
+            conexion.close();
         }
         catch (SQLException ex)
         {

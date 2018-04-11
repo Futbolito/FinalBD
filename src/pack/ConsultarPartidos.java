@@ -129,9 +129,7 @@ public class ConsultarPartidos extends javax.swing.JFrame {
             public void run() {
                 try {
                     new ConsultarPartidos().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConsultarPartidos.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(ConsultarPartidos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
