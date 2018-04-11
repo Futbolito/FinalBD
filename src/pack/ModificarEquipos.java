@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,10 +161,12 @@ public class ModificarEquipos extends javax.swing.JFrame {
            nom.setText("");
            cbxID.removeAllItems();
            setCombo();
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el Equipo.");
         }
       
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, "Falla inesperada.");
             try {
                 throw new SQLException(ex);
             } catch (SQLException ex1) {

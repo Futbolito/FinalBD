@@ -62,9 +62,8 @@ public class ModificarPartidos extends javax.swing.JFrame {
         getContentPane().add(nomEquipoL);
         nomEquipoL.setBounds(220, 100, 190, 20);
 
-        cbxIDPartido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIDPartido);
-        cbxIDPartido.setBounds(220, 40, 56, 20);
+        cbxIDPartido.setBounds(220, 40, 28, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
@@ -72,9 +71,8 @@ public class ModificarPartidos extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 70, 190, 15);
 
-        cbxIDJornada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIDJornada);
-        cbxIDJornada.setBounds(220, 70, 56, 20);
+        cbxIDJornada.setBounds(220, 70, 28, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 153));
@@ -112,9 +110,8 @@ public class ModificarPartidos extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(110, 300, 100, 15);
 
-        cbxIDEstadio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIDEstadio);
-        cbxIDEstadio.setBounds(220, 300, 56, 20);
+        cbxIDEstadio.setBounds(220, 300, 28, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);

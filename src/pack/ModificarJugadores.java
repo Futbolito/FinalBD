@@ -6,6 +6,7 @@
 package pack;
 
 import MySQL.Conexion;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ModificarJugadores extends javax.swing.JFrame {
     /**
      * Creates new form ModificarJugadores
      */
+    String aydi;
     public ModificarJugadores() {
         initComponents();
         setCombo();
@@ -93,14 +96,16 @@ public class ModificarJugadores extends javax.swing.JFrame {
        
        try
         {
+            
+            //"SELECT Nombre_Equipo FROM equipo inner join jugadores on equipo.id_Equipo=jugadores.id_Equipo where id_Jugador ='"+cbxID.getSelectedItem().toString()+"';" 
             Connection conexion;
             conexion=Conexion.obtener();
-            PreparedStatement consulta = conexion.prepareStatement("SELECT Nombre_Equipo FROM equipo inner join jugadores on equipo.id_Equipo=jugadores.id_Equipo where id_Jugador ='"+cbxID.getSelectedItem().toString()+"';" );           
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Jugador from jugadores where id_Jugador= '"+cbxID.getSelectedItem().toString()+"';"  );           
             ResultSet resultado = consulta.executeQuery();
             
             while(resultado.next())
             {
-                String dato=resultado.getString("Nombre_Equipo");                
+                String dato=resultado.getString("id_Jugador");                
                 nomEquipo.setText(dato);          
             }          
         }
@@ -129,11 +134,11 @@ public class ModificarJugadores extends javax.swing.JFrame {
         nom = new javax.swing.JTextField();
         cbxID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        nomEquipo = new javax.swing.JTextField();
         btnVolver1 = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nomEquipo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(402, 224));
@@ -146,9 +151,9 @@ public class ModificarJugadores extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 204, 153));
         jLabel1.setText("ID del Jugador a modificar: ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 40, 190, 14);
+        jLabel1.setBounds(10, 30, 190, 14);
         getContentPane().add(nom);
-        nom.setBounds(190, 80, 185, 30);
+        nom.setBounds(180, 60, 185, 30);
 
         cbxID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,21 +161,13 @@ public class ModificarJugadores extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxID);
-        cbxID.setBounds(190, 40, 70, 20);
+        cbxID.setBounds(190, 30, 70, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
         jLabel2.setText("Nombre del Jugador: ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 80, 160, 14);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 204, 153));
-        jLabel3.setText("Nombre del equipo del jugador:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 120, 200, 14);
-        getContentPane().add(nomEquipo);
-        nomEquipo.setBounds(220, 120, 159, 30);
+        jLabel2.setBounds(30, 70, 160, 14);
 
         btnVolver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver1.setBorder(null);
@@ -194,13 +191,21 @@ public class ModificarJugadores extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(220, 160, 90, 25);
+        btnVolver.setBounds(240, 160, 90, 25);
 
         fondo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         fondo.setForeground(new java.awt.Color(0, 204, 153));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/FondoTablas.jpg"))); // NOI18N
         getContentPane().add(fondo);
         fondo.setBounds(0, 0, 730, 490);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 204, 153));
+        jLabel3.setText("ID del equipo del jugador:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 110, 200, 14);
+        getContentPane().add(nomEquipo);
+        nomEquipo.setBounds(180, 110, 159, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -232,6 +237,32 @@ public class ModificarJugadores extends javax.swing.JFrame {
            nom.setText("");
            cbxID.removeAllItems();
            setCombo();
+           JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el Jugador.");
+        }
+      
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Falla Inesperada.");
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+   /*     
+          try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();           
+            Statement consulta = conexion.createStatement();
+            consulta.executeUpdate("update jugadores set id_Jugador = "+nomEquipo.getText()+" where id_Jugador='"+cbxID.getSelectedItem().toString()+"';");
+           
+          // nom.setText("");
+           //cbxID.removeAllItems();
+          // setCombo();
         }
       
         catch(SQLException ex)
@@ -245,21 +276,47 @@ public class ModificarJugadores extends javax.swing.JFrame {
             Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
         }
          
-         //SEGUNDA CONSULTA UPDATE
+         
+         
+         
+         
+         //SEGUNDA CONSULTA 
+         
+       /*try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("SELECT equipo.id_Equipo FROM equipo inner join jugadores on equipo.id_Equipo=jugadores.id_Equipo where equipo.Nombre_Equipo ='"+nomEquipo.getText()+"';");           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("id_Equipo");                
+                aydi = dato;
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         //TERCER CONSULTA UPDATE
          
           try
         {
             Connection conexion;
             conexion=Conexion.obtener();           
             Statement consulta = conexion.createStatement();
-           // consulta.executeUpdate("update jugadores set Nombre_Jugador = '"+nom.getText()+"' where id_Jugador='"+cbxID.getSelectedItem().toString()+"';");
+            consulta.executeUpdate("update jugadores set id_Equipo  = "+aydi+" where id_Jugador='"+cbxID.getSelectedItem().toString()+"';");
            
-            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
-            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
-            //ANALIZAR ESTO MAS A FONDO CUANDO TENGA MAS TIEMPO
-            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
-            //*********!!!!!!!***********!!!!!!!!*************!!!!!!!!*********!!!!!!!
             
+           nomEquipo.setText("");
            nom.setText("");
            cbxID.removeAllItems();
            setCombo();
@@ -274,7 +331,8 @@ public class ModificarJugadores extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+   
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**

@@ -5,6 +5,16 @@
  */
 package pack;
 
+import MySQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Wilthouk
@@ -16,8 +26,97 @@ public class ModificarTorneo extends javax.swing.JFrame {
      */
     public ModificarTorneo() {
         initComponents();
+        setCombo();
+        setVentana();
     }
 
+         public void setCombo()
+    {
+        
+       try
+        {
+            Connection conexion;
+            
+            conexion=Conexion.obtener();
+            
+            PreparedStatement consulta = conexion.prepareStatement("Select id_Torneo from torneo" );
+            ResultSet resultado = consulta.executeQuery();          
+                while(resultado.next())
+            {
+                cbxID.addItem(resultado.getString(1)); 
+                
+            }          
+            //resultado.close();
+            
+        }
+       
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+         
+    public void setVentana(){
+      
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select Nombre_Torneo from torneo where id_Torneo= "+cbxID.getSelectedItem().toString()+";" );           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("Nombre_Torneo");                
+                nom.setText(dato);          
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+      /* // SEGUNDA CONSULTA
+       
+       try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();
+            PreparedStatement consulta = conexion.prepareStatement("Select Ubicacion from estadios where Nombre_Estadio= '"+cbxID.getSelectedItem().toString()+"';" );           
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next())
+            {
+                String dato=resultado.getString("Ubicacion");                
+                ubi.setText(dato);          
+            }          
+        }
+        catch(SQLException ex)
+        {
+            try {
+                throw new SQLException(ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarEstadios.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+      
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +146,7 @@ public class ModificarTorneo extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 50, 150, 15);
         getContentPane().add(nom);
-        nom.setBounds(190, 50, 147, 20);
+        nom.setBounds(190, 50, 147, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
@@ -55,9 +154,8 @@ public class ModificarTorneo extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(10, 20, 180, 15);
 
-        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxID);
-        cbxID.setBounds(190, 20, 56, 20);
+        cbxID.setBounds(190, 20, 120, 20);
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pack/Media/BotonVolver.png"))); // NOI18N
         btnVolver.setBorder(null);
@@ -75,6 +173,11 @@ public class ModificarTorneo extends javax.swing.JFrame {
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGuardar);
         btnGuardar.setBounds(230, 100, 91, 25);
 
@@ -95,6 +198,35 @@ public class ModificarTorneo extends javax.swing.JFrame {
         cbxID.removeAllItems();
         nom.setText("");
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try
+        {
+            Connection conexion;
+            conexion=Conexion.obtener();          
+            Statement consulta = conexion.createStatement();
+            consulta.executeUpdate("update torneo set Nombre_Torneo = '"+nom.getText()+"' where id_Torneo='"+cbxID.getSelectedItem().toString()+"';");           
+            nom.setText("");
+            cbxID.removeAllItems();
+            setCombo();
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el torneo");
+        }
+      
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Falla inesperada :'v");
+            try {
+                throw new SQLException(ex);
+              
+            } catch (SQLException ex1) {
+                Logger.getLogger(ModificarTorneo.class.getName()).log(Level.SEVERE, null, ex1);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ModificarTorneo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setVentana();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

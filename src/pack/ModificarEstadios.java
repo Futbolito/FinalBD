@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -104,9 +105,11 @@ public class ModificarEstadios extends javax.swing.JFrame {
                 String dato=resultado.getString("Ubicacion");                
                 ubi.setText(dato);          
             }          
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el Estadio.");
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, "Falla inesperada.");
             try {
                 throw new SQLException(ex);
             } catch (SQLException ex1) {

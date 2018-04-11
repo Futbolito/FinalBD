@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -205,10 +206,12 @@ public class ModificarJornadas extends javax.swing.JFrame {
            ID.setText("");
            cbxID.removeAllItems();
            setCombo();
+           JOptionPane.showMessageDialog(null, "Se ha modificado correctamente la Jornada.");
         }
       
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, "Falla Inesperada");
             try {
                 throw new SQLException(ex);
             } catch (SQLException ex1) {

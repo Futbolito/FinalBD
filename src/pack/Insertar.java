@@ -163,9 +163,17 @@ public Insertar()
     }//GEN-LAST:event_formWindowActivated
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+        //switch(cbxI.getSelectedItem())
+        //{
+          //  case 1:          
+            //    obj.setVisible(true);
+             // this.dispose();   
+               // break;
+                
+            //case 2:
+                
+       // }
        
-        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cbxIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxIMouseClicked
